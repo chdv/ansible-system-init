@@ -1,0 +1,22 @@
+---
+- name: Update and upgrade system
+  hosts: localhost
+
+  tasks:
+    - name: Upgrade apt
+      apt:
+        autoclean: true
+        autoremove: true
+        clean: true
+        update_cache: true
+        upgrade: full
+
+    - name: Snap refresh  
+      shell: snap refresh  
+
+    - name: Flatpak update
+      shell: flatpak update -y
+
+    - name: Reload systemd daemon
+      systemd:
+        daemon_reload: true
