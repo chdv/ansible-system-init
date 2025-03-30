@@ -6,10 +6,11 @@
     - test_parameters.yaml
 
   tasks:
+    - name: Archive packages section
+      import_tasks: archive_packages.yaml
 
-    - import_tasks: archive_packages.yaml
-
-    - import_tasks: apt_packages.yaml
+    - name: Apt packages section
+      import_tasks: apt_packages.yaml
 
     - name: Download deb packages
       get_url:
