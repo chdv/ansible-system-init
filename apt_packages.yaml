@@ -35,12 +35,14 @@
     repo: "{{ item.repo }}"
     state: present
     filename: "{{ item.filename }}"
+    update_cache: true
   loop: "{{ apt_repositories }}"
 
 - name: Add apt ppa repositories
   ansible.builtin.apt_repository:
     repo: "{{ item }}"
     codename: trusty
+    update_cache: true
   loop: "{{ apt_ppa }}"
 
 - name: Installing apt packages
