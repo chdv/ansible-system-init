@@ -16,20 +16,20 @@
     path: "{{ arhive_packages_install_dir }}/{{ item.item.name }}"
     state: absent
   ignore_errors: true
-  when: "{{ item.changed }}"
+  when: item.changed
   loop: "{{ arhive_packages_downloaded['results'] }}"
 
 - name: Directory for install archive package
   file:
     path: "{{ arhive_packages_install_dir }}/{{ item.item.name }}"
     state: directory
-  when: "{{ item.changed }}"
+  when: item.changed
   loop: "{{ arhive_packages_downloaded['results'] }}"
 
 - name: Unarchive downloaded packages
   shell:
     cmd: "file-roller -e {{ arhive_packages_install_dir }}/{{ item.item.name }} {{ item.dest }}"
-  when: "{{ item.changed }}"
+  when: item.changed
   loop: "{{ arhive_packages_downloaded['results'] }}"
 
 - name: Copying icons

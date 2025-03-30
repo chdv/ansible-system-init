@@ -58,7 +58,7 @@
         name: "{{ item.item.service }}"
         enabled: true
         state: restarted
-      when: "{{ item.changed }}"
+      when: item.changed
       loop: "{{ copying_config['results'] }}"
 
     - name: Copying bin files
