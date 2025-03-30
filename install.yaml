@@ -7,9 +7,9 @@
 
   tasks:
 
-    - include_tasks: archive_packages.yaml
+    - import_tasks: archive_packages.yaml
 
-    - include_tasks: apt_packages.yaml
+    - import_tasks: apt_packages.yaml
 
     - name: Download deb packages
       get_url:
