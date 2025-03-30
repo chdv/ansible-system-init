@@ -1,0 +1,41 @@
+---
+- name: Directory for archive packages
+  file:
+    path: "{{ packages_distr_dir }}"
+    state: directory
+
+- name: Download archive packages
+  get_url:
+    url: "{{ item.url }}"
+    dest: "{{ packages_distr_dir }}"
+  register: arhive_packages_downloaded
+  loop: "{{ arhive_packages }}"
+
+- name: Delete directory for install archive package
+  file:
+    path: "{{ arhive_packages_install_dir }}/{{ item.item.name }}"
+    state: absent
+  ignore_errors: true
+  when: "{{ item.changed }}"
+  loop: "{{ arhive_packages_downloaded['results'] }}"
+
+- name: Directory for install archive package
+  file:
+    path: "{{ arhive_packages_install_dir }}/{{ item.item.name }}"
+    state: directory
+  when: "{{ item.changed }}"
+  loop: "{{ arhive_packages_downloaded['results'] }}"
+
+- name: Unarchive downloaded packages
+  shell:
+    cmd: "file-roller -e {{ arhive_packages_install_dir }}/{{ item.item.name }} {{ item.dest }}"
+  when: "{{ item.changed }}"
+  loop: "{{ arhive_packages_downloaded['results'] }}"
+
+- name: Copying icons
+  copy:
+    src: "./icons"
+    dest: "{{ arhive_packages_install_dir }}"
+    owner: root
+    group: root
+    mode: '0644'

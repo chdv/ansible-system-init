@@ -1,0 +1,75 @@
+---
+- name: Installing system
+  hosts: localhost
+  vars_files:
+    - parameters.yaml
+    - test_parameters.yaml
+
+  tasks:
+
+    - include_tasks: archive_packages.yaml
+
+    - include_tasks: apt_packages.yaml
+
+    - name: Download deb packages
+      get_url:
+        url: "{{ item }}"
+        dest: "{{ packages_distr_dir }}"
+      register: deb_packages_downloaded
+      loop: "{{ deb_packages }}"
+
+    - name: Install deb packages
+      apt:
+        deb: "{{ item.dest }}"
+      loop: "{{ deb_packages_downloaded['results'] }}"
+
+    - name: Installing snap packages
+      snap:
+        name: "{{ item.name }}"
+        classic: "{{ item.classic }}"
+      loop: "{{ snap_packages }}"
+
+    - name: Add the flathub flatpak repositories
+      community.general.flatpak_remote:
+        name: "{{ item.name }}"
+        state: present
+        flatpakrepo_url: "{{ item.url }}"
+      loop: "{{ flatpak_repositories }}"
+
+    - name: Installing flatpak packages
+      community.general.flatpak:
+        name: "{{ item }}"
+        state: latest
+      loop: "{{ flatpak_packages }}"
+
+    - name: Fill and copying config files
+      template:
+        src: "./config/{{ item.name }}"
+        dest: "{{ item.path }}"
+        owner: root
+        group: root
+        mode: '0644'
+      register: copying_config
+      loop: "{{ config_files }}"
+
+    - name: Restarting services
+      service:
+        name: "{{ item.item.service }}"
+        enabled: true
+        state: restarted
+      when: "{{ item.changed }}"
+      loop: "{{ copying_config['results'] }}"
+
+    - name: Copying bin files
+      copy:
+        src: "./distr/{{ item }}"
+        dest: "/usr/local/bin/"
+        owner: root
+        group: root
+        mode: '0755'
+      loop: "{{ local_bin }}"
+
+    - name: Invoke shell scripts
+      shell:
+        cmd: "{{ item }}"
+      loop: "{{ shell_scripts }}"

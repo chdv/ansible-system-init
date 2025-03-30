@@ -1,0 +1,50 @@
+---
+- name: Installing prior apt packages
+  package:
+    name: "{{ item }}"
+    state: latest
+  loop: "{{ apt_prior_packages }}"
+
+- name: Check gpg keys exists
+  ansible.builtin.stat:
+    path: "{{item.target_dir}}/{{ item.filename }}"
+  register: gpg_armor_exists
+  loop: "{{ gpg_armor_keys }}"
+
+- name: Download gpg keys
+  get_url:
+    url: "{{ item.item.url }}"
+    dest: /tmp/{{ item.item.filename }}
+  when: not item.stat.exists
+  loop: "{{ gpg_armor_exists['results'] }}"
+
+- name: Dearmor and copy gpg keys
+  shell:
+    cmd: "cat /tmp/{{ item.item.filename }} | gpg --dearmor gpg {{item.item.target_dir}}/{{ item.item.filename }}"
+  when: not item.stat.exists
+  loop: "{{ gpg_armor_exists['results'] }}"
+
+- name: Add an apt signing key
+  ansible.builtin.apt_key:
+    url: "{{ item }}"
+    state: present
+  loop: "{{ apt_keys }}"
+
+- name: Add apt repositories
+  ansible.builtin.apt_repository:
+    repo: "{{ item.repo }}"
+    state: present
+    filename: "{{ item.filename }}"
+  loop: "{{ apt_repositories }}"
+
+- name: Add apt ppa repositories
+  ansible.builtin.apt_repository:
+    repo: "{{ item }}"
+    codename: trusty
+  loop: "{{ apt_ppa }}"
+
+- name: Installing apt packages
+  package:
+    name: "{{ item }}"
+    state: latest
+  loop: "{{ apt_packages }}"

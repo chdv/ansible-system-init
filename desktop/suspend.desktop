@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Exec=systemctl suspend
+Name=Suspend
+Icon=/opt/icons/suspend.png
+Name[en_US]=Suspend

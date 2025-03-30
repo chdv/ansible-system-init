@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Furmark
+
+Type=Application
+Exec=sudo /opt/furmark/FurMark_linux64/FurMark_GUI
+Icon=/opt/icons/furmark.png
+

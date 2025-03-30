@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Exec=systemctl poweroff
+Name=Poweroff
+Icon=/opt/icons/shutdown.png
+Name[en_US]=Poweroff

@@ -1,0 +1,13 @@
+---
+apt_prior_packages:
+- apt-transport-https
+
+apt_packages:
+- flatpak
+
+snap_packages:
+- name: vlc
+  classic: false
+
+flatpak_packages:
+- com.calibre_ebook.calibre
