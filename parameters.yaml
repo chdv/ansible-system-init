@@ -22,6 +22,7 @@ apt_ppa:
 - ppa:ansible/ansible
 
 apt_packages:
+- gawk
 - flatpak
 - gnome-software-plugin-flatpak
 - sublime-text
