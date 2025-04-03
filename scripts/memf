@@ -1,0 +1,3 @@
+#!/bin/bash
+
+free -h | awk '/Mem:/ { printf "Memory:\n  Used: "$3 "\n  Available: "$7"\n" }'

@@ -1,0 +1,8 @@
+#!/bin/bash
+if [[ -z $1 ]]; then
+	echo Usage: $(basename $BASH_SOURCE) PORT
+else
+	port=$1
+	google-chrome "http://localhost:$port"	      
+fi
+

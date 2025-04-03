@@ -1,0 +1,53 @@
+#!/bin/bash
+
+uname -a
+gcc --version
+
+if [ $# -ne 1 ]; then
+	echo "========================"
+	echo "Please entry ISO filenme"
+	echo "========================"
+	exit
+fi
+
+in_file="$1"
+out_file="${1%.*}"
+
+cat <<EOF > main.c
+#include <stdio.h>
+#include <unistd.h>
+
+/*
+https://github.com/sacd-ripper/sacd-ripper/issues/80
+*/
+
+/* Yao Fei [feiyao@me.com](mailto:feiyao@me.com)
+        some SACD iso usse 2064bytes/sector
+        [--12--][+++2048+++][--4--] is the scheme to keep at leadt with the SACD i tested.
+*/
+
+typedef struct {
+	int head[12/4];
+	int data[2048/4];
+	int tail;
+} DVD_SEC;
+
+int main(int argc,char* argv[]) {
+
+DVD_SEC dvd;
+int n = 0;
+	while(n = read(0, &dvd, 2064)) {
+		write(1, dvd.data, 2048);
+	}
+}
+EOF
+
+gcc main.c -o a.exe
+./a.exe < "$in_file" > "$out_file.2048.iso"
+
+echo "========="
+echo "Completed"
+echo "========="
+ls -al
+rm -f a.exe main.c
+

@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# PocoX3Pro
+PHONE1_PATH="/run/user/1000/gvfs/mtp:host=Xiaomi_POCO_X3_Pro_168f2858/Внутренний общий накопитель"
+# PocoF5
+PHONE2_PATH="/run/user/1000/gvfs/mtp:host=Xiaomi_POCO_F5_f4f89e53/Внутренний общий накопитель"
+
+MUSIC_PATH="/media/dima/Archive1/PCM/PCM16"
+COPY_DIRS=("Piano" "Chamber" "Guitar" "New" "Symphonic pop" "Symphonic" "Jazz" "Soundtrack")
+
+if [ -e "$PHONE1_PATH" ]; then
+	cd $MUSIC_PATH
+	for DIR in "${COPY_DIRS[@]}"; do
+		echo `date +%T` Copying $(du -sh "$DIR")...
+		cp -vru "$DIR" "$PHONE1_PATH"/PCM16
+	done
+elif [ -e "$PHONE2_PATH" ]; then
+	cd $MUSIC_PATH
+	for DIR in "${COPY_DIRS[@]}"; do
+		echo `date +%T` Copying $(du -sh "$DIR")...
+		cp -vru "$DIR" "$PHONE2_PATH"/PCM16
+	done	
+fi
+echo `date +%T` Ending

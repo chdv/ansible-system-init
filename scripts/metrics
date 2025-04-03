@@ -1,0 +1,35 @@
+#!/bin/bash
+
+MUSIC_DIR="/media/dima/Archive1/MpdParent"
+METRICS_FILE="/var/lib/prometheus/text-metrics/metrics.prom"
+>$METRICS_FILE
+
+metric="music_device_usage"
+echo "# HELP $metric Music device usage" >> $METRICS_FILE
+echo "# TYPE $metric gauge" >> $METRICS_FILE
+echo $metric{type=\"used\"} `df -B1 $MUSIC_DIR | awk 'END{print $3}'` >> $METRICS_FILE
+echo $metric{type=\"availabe\"} `df -B1 $MUSIC_DIR | awk 'END{print $4}'` >> $METRICS_FILE
+
+echo "" >> $METRICS_FILE
+metric="music_files_size_bytes"
+echo "# HELP $metric Size of music directory" >> $METRICS_FILE
+echo "# TYPE $metric gauge" >> $METRICS_FILE
+echo $metric{type=\"dsd\"} `du -sbL ${MUSIC_DIR}/DSD/DSD | cut -f 1` >> $METRICS_FILE
+echo $metric{type=\"sacd\"} `du -sbL ${MUSIC_DIR}/DSD/SACDc | cut -f 1` >> $METRICS_FILE
+echo $metric{type=\"pcm24\"} `du -sbL ${MUSIC_DIR}/PCM/PCM24 | cut -f 1` >> $METRICS_FILE
+echo $metric{type=\"pcm16\"} `du -sbL ${MUSIC_DIR}/PCM/PCM16 | cut -f 1` >> $METRICS_FILE
+
+echo "" >> $METRICS_FILE
+metric="music_files_count"
+echo "# HELP $metric Count of music files" >> $METRICS_FILE
+echo "# TYPE $metric gauge" >> $METRICS_FILE
+echo $metric{type=\"dsd\"} `find -L ${MUSIC_DIR}/DSD/DSD -type f -name "*.dsf" | wc -l` >> $METRICS_FILE
+echo $metric{type=\"sacd\"} `find -L ${MUSIC_DIR}/DSD/SACDc -type f -name "*.dsf" | wc -l` >> $METRICS_FILE
+echo $metric{type=\"pcm24\"} `find -L ${MUSIC_DIR}/PCM/PCM24 -type f -name "*.flac" | wc -l` >> $METRICS_FILE
+echo $metric{type=\"pcm16\"} `find -L ${MUSIC_DIR}/PCM/PCM16 -type f -name "*.flac" | wc -l` >> $METRICS_FILE
+
+echo "" >> $METRICS_FILE
+/home/dima/bin/mstat prom >> $METRICS_FILE
+
+echo $METRICS_FILE content:
+cat $METRICS_FILE

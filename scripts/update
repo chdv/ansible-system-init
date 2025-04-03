@@ -1,0 +1,9 @@
+#!/bin/bash
+
+sudo apt update -y
+sudo apt upgrade -y
+sudo apt full-upgrade -y
+sudo apt autoremove -y
+sudo snap refresh
+flatpak update -y
+sudo systemctl daemon-reload

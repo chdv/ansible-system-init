@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [[ -z $1 ]]; then
+	echo Usage: $(basename $BASH_SOURCE) IMAGE
+else
+	image=$1
+	convert -thumbnail 1000 -quality 90% $image front.jpg
+	xdg-open front.jpg
+fi

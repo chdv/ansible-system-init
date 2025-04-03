@@ -1,0 +1,8 @@
+#!/bin/bash
+
+PROJECT="/home/dima/Workspace/MusicFilesMerger"
+LIBS="$PROJECT/lib/*"
+MAIN_JAR="$PROJECT/out/artifacts/MusicFilesMerger_jar/*"
+CLASSPATH="$LIBS:$MAIN_JAR"
+MAINCLASS="com.dch.merger.ComposerStatisticsMain"
+java -cp "$CLASSPATH" $MAINCLASS "$@" | less

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+output=`mktemp`
+
+for name in `kubectl api-resources --verbs=list -o name`; do 
+	echo $name
+	echo "" >> $output
+	echo "$name:" >> $output
+	kubectl get --show-kind --ignore-not-found -A $name >> $output 2>/dev/null
+done
+
+echo "file name: $output"
+subl $output

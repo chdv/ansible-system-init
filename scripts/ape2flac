@@ -1,0 +1,11 @@
+#!/bin/bash
+
+function ape2flac_func {
+	echo "Exec in dir:" `pwd`
+	for i in *.ape; do ffmpeg -i "$i" "${i%.*}.flac"; done
+}
+
+export -f ape2flac_func
+
+find -iname '*.cue' -execdir bash -c 'ape2flac_func "{}"' \;
+find -iname '*.ape' -delete

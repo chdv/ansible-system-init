@@ -1,0 +1,3 @@
+#!/bin/bash
+
+translate_shell en:ru "$@" | more

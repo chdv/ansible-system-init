@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ "$1" = "-a" ]; then
+	du -sh * | sort -hr | less
+	exit 0
+fi
+
+COUNT=15
+du -sh * | sort -hr | head -n $COUNT
+TOTAL=`ls | wc -l`
+
+if [ $TOTAL -gt $COUNT ]; then
+	echo
+	echo "...first $COUNT from $TOTAL total" 
+fi

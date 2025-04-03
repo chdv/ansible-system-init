@@ -1,0 +1,11 @@
+#!/bin/bash
+
+/usr/bin/google-chrome-stable %U &>/dev/null &
+subl &>/dev/null &
+thunderbird &>/dev/null &
+/opt/telegram/Telegram/Telegram &>/dev/null &
+cantata &>/dev/null &
+/opt/deadbeef/bin/deadbeef &>/dev/null &
+gnome-system-monitor &>/dev/null &
+qbittorrent >/dev/null >/dev/null & 
+evince &>/dev/null &

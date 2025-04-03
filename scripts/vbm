@@ -1,0 +1,86 @@
+#!/bin/bash
+
+if [[ -z $2 ]]; then
+	echo Usage: $(basename $BASH_SOURCE) MACHINE COMMAND
+	echo 
+	echo "Machines: "
+	echo "   (u)buntu server 24.04.n"
+	echo "   (f)edora server 41"
+	echo 
+	echo "Commands: "
+	echo "   (i)nfo"
+	echo "   (ip)"
+	echo "   (s)tartvm"
+	echo "   (ssh)"
+	echo "   (r)eboot"
+	echo "   (p)oweroff"
+	echo "   (hr)hard reset"
+	echo "   (hp)hard poweroff"
+else
+	machineParam=$1
+	machineIp=unknown
+	commandParam=$2
+	success=true
+	machines=("ubuntu server 24.04.n" "fedora server 41")
+	machineIps=("192.168.77.10" "192.168.77.11")
+	
+	case $machineParam in
+		u)
+			machine=${machines[0]}
+			machineIp=${machineIps[0]}
+			;;
+		f)
+			machine=${machines[1]}
+			machineIp=${machineIps[1]}
+			;;			
+		*)
+    		echo "machine \"$machineParam\" unknown"
+    		success=false;
+	esac
+
+	case $commandParam in
+		s)
+			command="startvm";;
+		r)			
+			command="ssh_reboot";;		
+		p)			
+			command="ssh_poweroff";;	
+		ssh)
+			command="ssh";;	
+		hr)			
+			command="reset";;		
+		hp)			
+			command="poweroff";;
+		i)			
+			command="info";;	
+		ip)			
+			command="ip";;					
+		*)
+    		echo "command \"$commandParam\" unknown"
+    		success=false;;
+	esac
+
+	if $success ; then
+		if [ $command = "startvm" ]; then
+			echo "$machine ($machineIp) starting..."
+			VBoxManage startvm "$machine"
+		elif [ $command = "ssh" ]; then	
+			echo "$machine ($machineIp) ssh connecting..."
+			ssh "$machineIp"
+		elif [ $command = "ssh_reboot" ]; then	
+			echo "$machine ($machineIp) rebooting..."
+			ssh "$machineIp" sudo reboot
+		elif [ $command = "ssh_poweroff" ]; then
+			echo "$machine ($machineIp) poweroff..."
+			ssh "$machineIp" sudo poweroff	
+		elif [ $command = "info" ]; then
+			echo "$machine ($machineIp)"
+			VBoxManage showvminfo "$machine" | grep State
+		elif [ $command = "ip" ]; then
+			echo "$machineIp"	
+		else
+			VBoxManage controlvm "$machine" $command
+		fi
+	fi
+	
+fi

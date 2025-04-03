@@ -1,0 +1,5 @@
+#!/bin/bash
+
+mounts 
+open_dirs
+progs

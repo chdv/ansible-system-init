@@ -1,0 +1,4 @@
+#!/bin/bash
+
+minikube -n superset service superset
+#google-chrome `minikube service -n superset superset-nodeport --url`

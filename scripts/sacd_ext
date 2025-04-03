@@ -1,0 +1,4 @@
+#!/bin/bash
+
+set -x
+find /media/dima/WDC1Tb/Downloads/ -iname '*.iso' -execdir /opt/sacd_extract/sacd_extract -2 -s -c -o "/media/dima/WDC1Tb/Downloads/" -i {} \;

@@ -1,0 +1,8 @@
+#!/bin/bash
+if [[ -z $1 ]]; then
+	echo Usage: $(basename $BASH_SOURCE) QUERY
+else
+	query=$1
+	google-chrome "translate.google.ru/?sl=en&tl=ru&text=$query&op=translate"	      
+fi
+
