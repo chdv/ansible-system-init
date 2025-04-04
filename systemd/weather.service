@@ -22,7 +22,7 @@ ExecStart=/usr/bin/podman run \
 	-d \
 	-e OPEN_WEATHER_APP_ID=0c251ba308231692d8174bdb875f1066 \
 	-p 4090:80 \
-	--name weather weather
+	--name weather docker.io/powerlf/weather
 ExecStop=/usr/bin/podman stop \
 	--ignore -t 10 \
 	--cidfile=%t/%n.ctr-id

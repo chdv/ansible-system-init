@@ -93,3 +93,20 @@
         block: |
           */10 * * * * root {{ scripts_path }}/metrics
           */10 * * * * {{ username }} {{ scripts_path }}/sync_ar   
+
+    - name: Copying systemd files
+      copy:
+        src: "./systemd/weather.service"
+        dest: "{{ user_systemd_path }}"
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        mode: '0664'
+
+    - name: Enable weather service
+      become_user: "{{ username }}"
+      ansible.builtin.systemd_service:
+        state: started
+        daemon_reload: true
+        enabled: true
+        name: weather     
+        scope: user   

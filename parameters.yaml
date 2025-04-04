@@ -137,6 +137,7 @@ username: dima
 homedir_path: "/home/{{ username }}"
 bashrc_path: "{{ homedir_path }}/.bashrc"
 scripts_path: "{{ homedir_path }}/bin"
+user_systemd_path: "{{ homedir_path }}/.config/systemd/user"
 
 mpd:
   music_directory: /media/dima/Archive1/MpdParent
