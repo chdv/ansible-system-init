@@ -61,7 +61,7 @@
       when: item.changed
       loop: "{{ copying_config['results'] }}"
 
-    - name: Copying bin files
+    - name: Copying local bin files
       copy:
         src: "./distr/{{ item }}"
         dest: "/usr/local/bin/"
@@ -110,3 +110,9 @@
         enabled: true
         name: weather     
         scope: user   
+
+    - name: Synchronize bin-scripts
+      ansible.posix.synchronize:
+        src: ./bin/
+        dest: "{{ scripts_path }}/"
+        delete: true  
