@@ -63,6 +63,9 @@ apt_packages:
 - mpc
 - jackd2
 - qsynth
+- prometheus
+- prometheus-alertmanager
+- grafana
 
 deb_packages:
 - https://deac-fra.dl.sourceforge.net/project/deadbeef/travis/linux/1.10.0/deadbeef-static_1.10.0-1_amd64.deb
@@ -129,6 +132,11 @@ shell_scripts:
 
 local_bin:
 - vagrant_2.4.3_linux_amd64/vagrant
+
+username: dima
+homedir_path: "/home/{{ username }}"
+bashrc_path: "{{ homedir_path }}/.bashrc"
+scripts_path: "{{ homedir_path }}/bin"
 
 mpd:
   music_directory: /media/dima/Archive1/MpdParent

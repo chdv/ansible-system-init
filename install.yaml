@@ -74,3 +74,22 @@
       shell:
         cmd: "{{ item }}"
       loop: "{{ shell_scripts }}"
+
+    - name: Feel .bashrc
+      ansible.builtin.blockinfile:
+        path: "{{ bashrc_path }}"
+        block: |
+          export SYSTEMD_LESS=FRXMK 
+          alias k='kubectl'
+          alias p='podman'
+          export KUBE_EDITOR="nano"
+          export EDITOR="nano"
+          source <(kubectl completion bash | sed s/kubectl/k/g)
+          source <(podman completion bash | sed s/podman/p/g)
+
+    - name: Feel /etc/crontab
+      ansible.builtin.blockinfile:
+        path: "/etc/crontab"
+        block: |
+          */10 * * * * root {{ scripts_path }}/metrics
+          */10 * * * * {{ username }} {{ scripts_path }}/sync_ar   
