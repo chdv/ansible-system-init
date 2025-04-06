@@ -6,6 +6,13 @@
     - test_parameters.yaml
 
   tasks:
+
+    - name: Synchronize bin-scripts
+      ansible.posix.synchronize:
+        src: ./bin/
+        dest: "{{ scripts_path }}/"
+        delete: true  
+
     - name: Archive packages section
       import_tasks: archive_packages.yaml
 
@@ -110,9 +117,3 @@
         enabled: true
         name: weather     
         scope: user   
-
-    - name: Synchronize bin-scripts
-      ansible.posix.synchronize:
-        src: ./bin/
-        dest: "{{ scripts_path }}/"
-        delete: true  

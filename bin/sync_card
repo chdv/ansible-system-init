@@ -8,6 +8,15 @@ CARD2_PATH="/media/dima/9C33-6BBD"
 MUSIC_PATH1="/media/dima/Archive1/PCM"
 MUSIC_PATH2="/media/dima/Archive1/DSD"
 
+if [ "$1" = "-u" ]; then
+	if [ -e $CARD1_PATH ]; then
+		sudo umount $CARD1_PATH
+	elif [ -e $CARD2_PATH ]; then
+		sudo umount $CARD2_PATH
+	fi
+	exit 0
+fi
+
 if [ -e $CARD1_PATH ]; then
 	rsync -vtr --delete --outbuf=N $MUSIC_PATH1/PCM16/ $CARD1_PATH/PCM16/
 	rsync -vtr --delete --outbuf=N $MUSIC_PATH1/PCM24/Composers/ $CARD1_PATH/PCM24/Composers/
