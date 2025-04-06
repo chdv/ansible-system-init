@@ -10,9 +10,9 @@ MUSIC_PATH2="/media/dima/Archive1/DSD"
 
 if [ "$1" = "-u" ]; then
 	if [ -e $CARD1_PATH ]; then
-		sudo umount $CARD1_PATH
+		umount $CARD1_PATH
 	elif [ -e $CARD2_PATH ]; then
-		sudo umount $CARD2_PATH
+		umount $CARD2_PATH
 	fi
 	exit 0
 fi
