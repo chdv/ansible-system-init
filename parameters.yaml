@@ -66,6 +66,7 @@ apt_packages:
 - prometheus
 - prometheus-alertmanager
 - grafana
+- htop
 
 deb_packages:
 - https://deac-fra.dl.sourceforge.net/project/deadbeef/travis/linux/1.10.0/deadbeef-static_1.10.0-1_amd64.deb
