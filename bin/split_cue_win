@@ -3,7 +3,7 @@
 
 function split_cue1251_func {
 	echo "Exec in dir:" `pwd`
-	iconv -f Windows-1251 -t UTF-8 *.cue > out.cue > out.cue || iconv -f Windows-1251 -t UTF-8 *.CUE > out.cue
+	iconv -f Windows-1251 -t UTF-8 *.cue > out.cue || iconv -f Windows-1251 -t UTF-8 *.CUE > out.cue
 	shnsplit -f out.cue -t "%n - %t" -o "flac flac -s -8 -o %f -" *.flac
 	rename "s/:/ -/g" *
 	rename "s/\?//g" *
