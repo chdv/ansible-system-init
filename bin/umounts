@@ -1,0 +1,8 @@
+#!/bin/bash
+
+nautilus -q
+
+udisksctl unmount -b /dev/sda
+udisksctl unmount -b /dev/sdb
+udisksctl unmount -b /dev/sdd
+udisksctl unmount -b /dev/sde

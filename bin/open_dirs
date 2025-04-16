@@ -10,6 +10,10 @@ nautilus &>/dev/null /media/dima/wd160/Music/DSD64 &
 sleep 1
 nautilus &>/dev/null /media/dima/wd10/Downloads &
 sleep 1
+nautilus &>/dev/null /media/dima/wd30 &
+sleep 1
+nautilus &>/dev/null /media/dima/wd40 &
+sleep 1
 nautilus &>/dev/null /home/dima/Downloads &
 sleep 1
 nautilus &>/dev/null /home/dima/BooksIT/ru &
