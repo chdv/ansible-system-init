@@ -1,6 +1,6 @@
 #!/bin/bash
 
 udisksctl mount -b /dev/sda2
-udisksctl mount -b /dev/sdb2
-udisksctl mount -b /dev/sdd1
+udisksctl mount -b /dev/sdb
+udisksctl mount -b /dev/sdd
 udisksctl mount -b /dev/sde
