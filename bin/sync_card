@@ -5,8 +5,7 @@ CARD1_PATH="/media/dima/6433-6132"
 # 512Gb
 CARD2_PATH="/media/dima/9C33-6BBD"
 
-MUSIC_PATH1="/media/dima/Archive1/PCM"
-MUSIC_PATH2="/media/dima/Archive1/DSD"
+MUSIC_PATH="/media/dima/WDC16Tb/Music"
 
 if [ "$1" = "-u" ]; then
 	if [ -e $CARD1_PATH ]; then
@@ -18,13 +17,13 @@ if [ "$1" = "-u" ]; then
 fi
 
 if [ -e $CARD1_PATH ]; then
-	rsync -vtr --delete --outbuf=N $MUSIC_PATH1/PCM16/ $CARD1_PATH/PCM16/
-	rsync -vtr --delete --outbuf=N $MUSIC_PATH1/PCM24/Composers/ $CARD1_PATH/PCM24/Composers/
-	rsync -vtr --delete --outbuf=N $MUSIC_PATH1/PCM24/New/ $CARD1_PATH/PCM24/New/
-	rsync -vtr --delete --outbuf=N $MUSIC_PATH2/SACDc/New/ $CARD1_PATH/SACDc/New/
+	rsync -vtr --delete --outbuf=N $MUSIC_PATH/PCM16/ $CARD1_PATH/PCM16/
+	rsync -vtr --delete --outbuf=N $MUSIC_PATH/PCM24/Composers/ $CARD1_PATH/PCM24/Composers/
+	rsync -vtr --delete --outbuf=N $MUSIC_PATH/PCM24/New/ $CARD1_PATH/PCM24/New/
+	rsync -vtr --delete --outbuf=N $MUSIC_PATH/SACDc/New/ $CARD1_PATH/SACDc/New/
 elif [ -e $CARD2_PATH ]; then
-	rsync -vtr --delete --outbuf=N $MUSIC_PATH1/PCM16/Composers/ $CARD2_PATH/PCM16/Composers/
-	rsync -vtr --delete --outbuf=N $MUSIC_PATH1/PCM24/ $CARD2_PATH/PCM24/ --exclude='/Composers' --exclude='/New' 
+	rsync -vtr --delete --outbuf=N $MUSIC_PATH/PCM16/Composers/ $CARD2_PATH/PCM16/Composers/
+	rsync -vtr --delete --outbuf=N $MUSIC_PATH/PCM24/ $CARD2_PATH/PCM24/ --exclude='/Composers' --exclude='/New' 
 fi
 
 sudo iotop

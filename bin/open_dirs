@@ -1,16 +1,12 @@
 #!/bin/bash
 
-nautilus &>/dev/null /media/dima/Archive1/DSD/DSD &
+nautilus &>/dev/null /media/dima/WDC16Tb/Music/DSD &
 sleep 1
-nautilus &>/dev/null /media/dima/Archive1/PCM/PCM24 &
+nautilus &>/dev/null /media/dima/WDC16Tb/Music/PCM24 &
 sleep 1
-nautilus &>/dev/null /media/dima/Archive1/Scripts &
+nautilus &>/dev/null /media/dima/WDC16Tb/Music/SACDc &
 sleep 1
-nautilus &>/dev/null /media/dima/Archive1/DSD/SACDc &
-sleep 1
-nautilus &>/dev/null /media/dima/Archive1/PCM/PCM16 &
-sleep 1
-nautilus &>/dev/null /media/dima/Archive2/MusicArchive &
+nautilus &>/dev/null /media/dima/WDC16Tb/Music/PCM16 &
 sleep 1
 nautilus &>/dev/null /media/dima/WDC1Tb/Downloads &
 sleep 1

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PROJECT="/home/dima/IdeaProjects/MusicFilesMerger"
+PROJECT="/home/dima/Workspace/MusicFilesMerger"
 LIBS="$PROJECT/lib/*"
 MAIN_JAR="$PROJECT/out/artifacts/MusicFilesMerger_jar/*"
 CLASSPATH="$LIBS:$MAIN_JAR"
