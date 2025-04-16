@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MUSIC_DIR="/media/dima/WDC16Tb/Music"
+MUSIC_DIR="/media/dima/wd160/Music"
 METRICS_FILE="/var/lib/prometheus/text-metrics/metrics.prom"
 >$METRICS_FILE
 

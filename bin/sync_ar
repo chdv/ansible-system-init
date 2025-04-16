@@ -1,8 +1,10 @@
 #!/bin/bash
 
-rsync -vtr --delete /home/dima/BooksIT/ /media/dima/Archive2/BooksArchive/BooksIT/
-rsync -vtr --delete /home/dima/bin/ /media/dima/Archive2/CodeArchive/Linux/home/bin/
-rsync -vtr --delete /home/dima/Desktop/ /media/dima/Archive2/CodeArchive/Linux/home/Desktop/
-rsync -vtr --delete /home/dima/Workspace/NewKnowledge/ /media/dima/Archive2/VzvArchive/сайты/NewKnowledge/ --exclude='/site_big_data' 
-rsync -vtr --delete /home/dima/Workspace/ /media/dima/Archive2/CodeArchive/Workspace/ --exclude='/NewKnowledge' 
-rsync -vtr /home/dima/Music/Sounds/record/ /media/dima/Archive2/VideoArchive/Соседи/21\ кв/audio/
+ARCHIVE=/media/dima/wd40/Archive
+
+rsync -vtr --delete /home/dima/BooksIT/ $ARCHIVE/BooksArchive/BooksIT/
+rsync -vtr --delete /home/dima/bin/ $ARCHIVE/CodeArchive/Linux/home/bin/
+rsync -vtr --delete /home/dima/Desktop/ $ARCHIVE/CodeArchive/Linux/home/Desktop/
+rsync -vtr --delete /home/dima/Workspace/NewKnowledge/ $ARCHIVE/VzvArchive/сайты/NewKnowledge/ --exclude='/site_big_data' 
+rsync -vtr --delete /home/dima/Workspace/ $ARCHIVE/CodeArchive/Workspace/ --exclude='/NewKnowledge' 
+rsync -vtr /home/dima/Music/Sounds/record/ $ARCHIVE/VideoArchive/Соседи/21\ кв/audio/

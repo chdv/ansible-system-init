@@ -5,7 +5,7 @@ CARD1_PATH="/media/dima/6433-6132"
 # 512Gb
 CARD2_PATH="/media/dima/9C33-6BBD"
 
-MUSIC_PATH="/media/dima/WDC16Tb/Music"
+MUSIC_PATH="/media/dima/wd160/Music"
 
 if [ "$1" = "-u" ]; then
 	if [ -e $CARD1_PATH ]; then

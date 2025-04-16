@@ -3,5 +3,5 @@ if [[ -z $1 ]]; then
 	echo Usage: $(basename $BASH_SOURCE) WORD
 else
 	word=$1
-	find -L /media/dima/WDC16Tb/Music -type d -name "*$word*" -printf '%f\n' | less
+	find -L /media/dima/wd160/Music -type d -name "*$word*" -printf '%f\n' | less
 fi
