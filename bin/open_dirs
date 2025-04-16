@@ -4,9 +4,9 @@ nautilus &>/dev/null /media/dima/WDC16Tb/Music/DSD &
 sleep 1
 nautilus &>/dev/null /media/dima/WDC16Tb/Music/PCM24 &
 sleep 1
-nautilus &>/dev/null /media/dima/WDC16Tb/Music/SACDc &
-sleep 1
 nautilus &>/dev/null /media/dima/WDC16Tb/Music/PCM16 &
+sleep 1
+nautilus &>/dev/null /media/dima/WDC16Tb/Music/DSD64 &
 sleep 1
 nautilus &>/dev/null /media/dima/WDC1Tb/Downloads &
 sleep 1
