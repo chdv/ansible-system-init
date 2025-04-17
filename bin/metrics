@@ -29,17 +29,17 @@ echo $metric{type=\"pcm24\"} `find -L ${MUSIC_DIR}/PCM24 -type f -name "*.flac" 
 echo $metric{type=\"pcm16\"} `find -L ${MUSIC_DIR}/PCM16 -type f -name "*.flac" | wc -l` >> $METRICS_FILE
 
 IFS=$'\n'
-p=`df -B1 | grep /dev/sd`
+df_output=`df -B1 | grep /dev/sd`
 echo "" >> $METRICS_FILE
 metric="filesystem_device_usage_bytes"
 echo "# HELP $metric Filesystem device usage bytes" >> $METRICS_FILE
 echo "# TYPE $metric gauge" >> $METRICS_FILE
 
-for n in $p
+for df_row in $df_output
 do 
-	main=$metric{name=\"`awk '{print $1}' <<< $n`\",path=\"`awk '{print $6}' <<< $n`\"
-	echo $main,type=\"used\"} `awk '{print $3}' <<< $n` >> $METRICS_FILE
-	echo $main,type=\"available\"} `awk '{print $4}' <<< $n` >> $METRICS_FILE
+	main=$metric{name=\"`awk '{print $1}' <<< $df_row`\",path=\"`awk '{print $6}' <<< $df_row`\"
+	echo $main,type=\"used\"} `awk '{print $3}' <<< $df_row` >> $METRICS_FILE
+	echo $main,type=\"available\"} `awk '{print $4}' <<< $df_row` >> $METRICS_FILE
 done
 
 echo "" >> $METRICS_FILE
