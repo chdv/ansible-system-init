@@ -9,3 +9,14 @@ do
 	wkhtmltoimage --height 800 --crop-x 0 --crop-y 111 --crop-w 1024 --crop-h 578 $site/$name/ $img_root/$name.png
 	convert -thumbnail 500 -quality 90% $img_root/$name.png $img_root/$name.png
 done
+
+paths=(commodities/gold currencies/usd-rub)
+img_root=/usr/share/grafana/public/custom
+site=https://ru.investing.com/
+
+for name in ${paths[*]} 
+do 
+	cname="${name////-}"
+	wkhtmltoimage --height 800 --crop-x 0 --crop-y 475 --crop-w 587 --crop-h 199 $site/$name $img_root/$cname.png
+	convert -thumbnail 500 -quality 90% $img_root/$cname.png $img_root/$cname.png
+done
