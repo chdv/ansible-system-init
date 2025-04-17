@@ -20,3 +20,7 @@ do
 	wkhtmltoimage --height 800 --crop-x 0 --crop-y 475 --crop-w 587 --crop-h 199 $site/$name $img_root/$cname.png
 	convert -thumbnail 500 -quality 90% $img_root/$cname.png $img_root/$cname.png
 done
+
+site=https://yandex.ru/pogoda
+
+wkhtmltoimage --crop-x 41 --crop-y 595 --crop-w 657 --crop-h 204 $site $img_root/ya-pogoda.png
