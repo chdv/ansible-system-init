@@ -142,7 +142,7 @@ scripts_path: "{{ homedir_path }}/bin"
 user_systemd_path: "{{ homedir_path }}/.config/systemd/user"
 
 mpd:
-  music_directory: /media/dima/WDC16Tb/Music
+  music_directory: /media/dima/wd160/Music
   audio_output:
   - name: "Shanling H7"
     device: "hw:CARD=H7,DEV=0"
