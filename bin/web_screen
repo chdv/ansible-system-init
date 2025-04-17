@@ -21,6 +21,6 @@ do
 	convert -thumbnail 500 -quality 90% $img_root/$cname.png $img_root/$cname.png
 done
 
-site=https://yandex.ru/pogoda
+site='https://www.hmn.ru/index.php?index=33&days=14&value=27612'
 
-wkhtmltoimage --crop-x 41 --crop-y 595 --crop-w 657 --crop-h 204 $site $img_root/ya-pogoda.png
+wkhtmltoimage --crop-x 145 --crop-y 632 --crop-w 489 --crop-h 212 $site $img_root/pogoda.png
