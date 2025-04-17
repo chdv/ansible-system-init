@@ -99,7 +99,7 @@
         path: "/etc/crontab"
         block: |
           */10 * * * * root {{ scripts_path }}/metrics
-          */10 * * * * root {{ scripts_path }}/web_screen
+          */5 * * * * root {{ scripts_path }}/web_screen
           */10 * * * * {{ username }} {{ scripts_path }}/sync_ar   
 
     - name: Copying systemd files

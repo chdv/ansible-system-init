@@ -1,7 +1,8 @@
 #!/bin/bash
 
+img_root=/var/www/html/img
+
 paths=(KB3DnHab Yb8Th9Q5 7b49D38G)
-img_root=/usr/share/grafana/public/custom
 site=https://rtsp.me/embed
 
 for name in ${paths[*]} 
@@ -11,8 +12,7 @@ do
 done
 
 paths=(commodities/gold currencies/usd-rub)
-img_root=/usr/share/grafana/public/custom
-site=https://ru.investing.com/
+site=https://ru.investing.com
 
 for name in ${paths[*]} 
 do 
