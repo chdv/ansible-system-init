@@ -1,0 +1,11 @@
+#!/bin/bash
+
+paths=(KB3DnHab Yb8Th9Q5 7b49D38G)
+img_root=/usr/share/grafana/public/custom
+site=https://rtsp.me/embed
+
+for name in ${paths[*]} 
+do 
+	wkhtmltoimage --height 800 --crop-x 0 --crop-y 111 --crop-w 1024 --crop-h 578 $site/$name/ $img_root/$name.png
+	convert -thumbnail 500 -quality 90% $img_root/$name.png $img_root/$name.png
+done
