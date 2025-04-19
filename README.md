@@ -6,4 +6,3 @@
 ```
 ansible-playbook -b install.yaml
 ```
-
