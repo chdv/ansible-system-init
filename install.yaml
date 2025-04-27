@@ -101,7 +101,7 @@
           */10 * * * * root {{ scripts_path }}/metrics
           */5 * * * * root {{ scripts_path }}/web_screen
           */5 * * * * root mpc update
-          */10 * * * * {{ username }} {{ scripts_path }}/sync_ar   
+          */10 * * * * {{ username }} {{ scripts_path }}/sync_ar
 
     - name: Copying systemd files
       copy:
