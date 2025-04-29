@@ -9,3 +9,4 @@ export -f ape2flac_func
 
 find -iname '*.cue' -execdir bash -c 'ape2flac_func "{}"' \;
 #find -iname '*.ape' -delete
+#ffmpeg -i *.wv out.flac
