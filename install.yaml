@@ -3,7 +3,7 @@
   hosts: localhost
   vars_files:
     - parameters.yaml
-  #  - test_parameters.yaml
+    - test_parameters.yaml
 
   tasks:
 
