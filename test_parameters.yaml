@@ -12,6 +12,6 @@ snap_packages:
 flatpak_packages:
 - com.calibre_ebook.calibre
 
-arhive_packages: []
+#arhive_packages: []
 
 deb_packages: []
