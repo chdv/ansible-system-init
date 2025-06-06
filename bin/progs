@@ -12,4 +12,4 @@ evince &>/dev/null &
 gnome-control-center &>/dev/null &
 vlc &>/dev/null &
 code &>/dev/null &
-idle &>/dev/null &
+/opt/pycharm-community/pycharm-community-2025.1.1.1/bin/pycharm &>/dev/null &
