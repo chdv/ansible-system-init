@@ -85,8 +85,6 @@ arhive_packages:
   name: telegram
 - url: https://github.com/EuFlo/sacd-ripper/releases/download/0.3.9.3/sacd_extract-0.3.9.3-117-linux.zip
   name: sacd_extract
-- url: https://download.jetbrains.com/python/pycharm-community-2025.1.1.1.tar.gz
-  name: pycharm-community
 
 snap_packages:
 - name: vlc
@@ -98,6 +96,8 @@ snap_packages:
 - name: dbeaver-ce
   classic: false
 - name: intellij-idea-community
+  classic: true
+- name: pycharm-community
   classic: true
 - name: code
   classic: true
