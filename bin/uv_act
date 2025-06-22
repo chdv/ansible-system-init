@@ -1,0 +1,3 @@
+#!/bin/bash
+
+source ~/Documents/Code/python/uv_venv_12/bin/activate
