@@ -1,9 +1,11 @@
 #!/bin/bash
 
-# 1Tb
-CARD1_PATH="/media/dima/6433-6132"
-# 512Gb
-CARD2_PATH="/media/dima/9C33-6BBD"
+# 1Tb Sandisk Red
+CARD1_PATH="/media/dima/Red1Tb"
+# 512Gb Phone Samsung Blue
+CARD2_PATH="/media/dima/Blue512Gb"
+# 512Gb Samsung Red
+CARD3_PATH="/media/dima/Red512Gb"
 
 MUSIC_PATH="/media/dima/wd160/Music"
 
@@ -12,19 +14,23 @@ if [ "$1" = "-u" ]; then
 		umount $CARD1_PATH
 	elif [ -e $CARD2_PATH ]; then
 		umount $CARD2_PATH
+	elif [ -e $CARD3_PATH ]; then
+		umount $CARD3_PATH	
 	fi
 	exit 0
 fi
 
 if [ -e $CARD1_PATH ]; then
-	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/ $CARD1_PATH/PCM16/
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/ $CARD1_PATH/PCM16/ --exclude='/New' 
 	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM24/Composers/ $CARD1_PATH/PCM24/Composers/
-	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM24/New/ $CARD1_PATH/PCM24/New/
-	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/DSD64/New/ $CARD1_PATH/DSD64/New/
-	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/DSD/New/ $CARD1_PATH/DSD/New/
 elif [ -e $CARD2_PATH ]; then
 	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/Composers/ $CARD2_PATH/PCM16/Composers/
 	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM24/ $CARD2_PATH/PCM24/ --exclude='/Composers' --exclude='/New' 
+elif [ -e $CARD3_PATH ]; then
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/New/ $CARD1_PATH/PCM16/New/
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM24/New/ $CARD1_PATH/PCM24/New/
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/DSD64/New/ $CARD1_PATH/DSD64/New/
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/DSD/New/ $CARD1_PATH/DSD/New/	
 fi
 
 sudo iotop
