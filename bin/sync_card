@@ -23,8 +23,7 @@ fi
 if [ -e $CARD1_PATH ]; then
 	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/ $CARD1_PATH/PCM16/ --exclude='/New' 
 	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM24/Composers/ $CARD1_PATH/PCM24/Composers/
-elif [ -e $CARD2_PATH ]; then
-	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/Composers/ $CARD2_PATH/PCM16/Composers/
+elif [ -e $CARD2_PATH ]; then	
 	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM24/ $CARD2_PATH/PCM24/ --exclude='/Composers' --exclude='/New' 
 elif [ -e $CARD3_PATH ]; then
 	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/New/ $CARD3_PATH/PCM16/New/

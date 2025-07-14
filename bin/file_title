@@ -1,0 +1,15 @@
+#!/usr/bin/env python3
+
+import os
+
+wdir=os.getcwd()
+media=('flac','dsf', 'mp3')
+ 
+for file in os.listdir(wdir):
+    if not file.endswith(media): continue        
+    print(file)
+    fname, fext = os.path.splitext(file)
+    fname=fname.replace('_ ',' - ')
+    fname=fname.title() + fext
+    print(fname)
+    os.rename(wdir + '/' + file, wdir + '/' + fname)
