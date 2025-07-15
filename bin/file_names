@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+
+import os
+
+wdir=os.getcwd()
+media=('flac','dsf', 'mp3')
+'''
+Example names.txt: 
+01. La Enredadera - De Madera
+02. Mi Tiempo - Rafael Riqueni
+03. Al Aire - Pepe Habichuela
+'''
+
+names=dict(map(lambda s: (s[:2], s[4:]), map(str.rstrip, open(wdir + '/names.txt').readlines())))
+files=[f for f in os.listdir(wdir) if f.endswith(media)]
+root, extension = os.path.splitext(files[0])
+for file in files:
+    newName = file[:2] + ' - ' + names[file[:2]] + extension
+    print(file)
+    print(newName)
+    os.rename(wdir + '/' + file, wdir + '/' + newName)
