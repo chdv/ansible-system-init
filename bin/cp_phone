@@ -6,9 +6,8 @@ PHONE1_PATH="/run/user/1000/gvfs/mtp:host=Xiaomi_POCO_X3_Pro_168f2858/Внутр
 PHONE2_PATH="/run/user/1000/gvfs/mtp:host=Xiaomi_POCO_F5_f4f89e53/Внутренний общий накопитель"
 
 MUSIC_PATH="/media/dima/wd160/Music/PCM16"
-COPY_DIRS1=("Piano" "Guitar" "Chamber" "Modern" "Symphonic" "Composers")
+COPY_DIRS1=("Piano" "Guitar" "Chamber" "Modern" "Symphonic" "Flamenco" "Composers")
 COPY_DIRS2=("Symphonic pop" "Jazz" "Soundtrack")
-# skip "Flamenco"
 
 if [ -e "$PHONE1_PATH" ]; then
 	cd $MUSIC_PATH
