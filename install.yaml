@@ -13,6 +13,16 @@
         dest: "{{ scripts_path }}/"
         delete: true  
 
+    - name: Feel /etc/crontab
+      ansible.builtin.blockinfile:
+        path: "/etc/crontab"
+        block: |
+          */10 * * * * root {{ scripts_path }}/metrics
+          */5 * * * * root {{ scripts_path }}/web_screen
+          */5 * * * * root mpc update
+          * * * * * {{ username }} {{ scripts_path }}/mpd_dump
+          */10 * * * * {{ username }} {{ scripts_path }}/sync_ar
+
     - name: Archive packages section
       import_tasks: archive_packages.yaml
 
@@ -93,16 +103,6 @@
           export EDITOR="nano"
           source <(kubectl completion bash | sed s/kubectl/k/g)
           source <(podman completion bash | sed s/podman/p/g)
-
-    - name: Feel /etc/crontab
-      ansible.builtin.blockinfile:
-        path: "/etc/crontab"
-        block: |
-          */10 * * * * root {{ scripts_path }}/metrics
-          */5 * * * * root {{ scripts_path }}/web_screen
-          */5 * * * * root mpc update
-          */5 * * * * {{ username }} mpc playlist > /home/{{ username }}/Documents/playlist
-          */10 * * * * {{ username }} {{ scripts_path }}/sync_ar
 
     - name: Copying systemd files
       copy:

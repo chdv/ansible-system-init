@@ -1,0 +1,3 @@
+#!/bin/bash
+
+test `mpc status %state%` == 'playing' && mpc playlist > /home/dima/Documents/playlist && echo 'dumped'
