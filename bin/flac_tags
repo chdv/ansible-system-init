@@ -28,7 +28,7 @@ for file in *.flac; do
 	echo "TITLE=$name"
 	echo "TRACKNUMBER=$i"
 	metaflac --remove-all "$file"
-	metaflac --set-tag="ARTIST=$artist" --set-tag="GENRE=Classical" --set-tag="ALBUM=$album" --set-tag="TITLE=$name" --set-tag="TRACKNUMBER=$i" "$file"	
+	metaflac --set-tag="ARTIST=$artist" --set-tag="GENRE=$genre" --set-tag="ALBUM=$album" --set-tag="TITLE=$name" --set-tag="TRACKNUMBER=$i" "$file"	
 	i=$((i+1))
 done
 #mpc update
