@@ -1,0 +1,29 @@
+#!/bin/bash
+
+album=`basename "$PWD"`
+
+if [[ ${#album} -lt 10 ]]; then
+	par=`dirname "$PWD"`
+	album=`basename "$par"`
+fi	
+
+artist=' '
+
+if [ -n "$1" ]; then
+  artist=$1
+fi
+
+echo $album
+i=1
+for file in *.flac; do
+	echo "ALBUM=$album" 
+	name=$(basename "$file" .flac)
+	name="${name:5}"
+	echo "TITLE=$name"
+	echo "TRACKNUMBER=$i"
+	metaflac --remove-all "$file"
+	metaflac --set-tag="ARTIST=$artist" --set-tag="GENRE=Classical" --set-tag="ALBUM=$album" --set-tag="TITLE=$name" --set-tag="TRACKNUMBER=$i" "$file"	
+	i=$((i+1))
+done
+#mpc update
+#metaflac --list *.flac
