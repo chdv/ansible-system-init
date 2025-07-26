@@ -13,6 +13,12 @@ if [ -n "$1" ]; then
   artist=$1
 fi
 
+genre='Classical'
+
+if [ -n "$2" ]; then
+  genre=$2
+fi
+
 echo $album
 i=1
 for file in *.flac; do
