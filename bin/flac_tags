@@ -42,3 +42,5 @@ for file in *.flac; do
 done
 #mpc update
 #metaflac --list *.flac
+#metaflac --remove-tag="TITLE" filename
+#metaflac --set-tag="TITLE=Symphony No. 6" filename
