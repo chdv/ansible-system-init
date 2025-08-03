@@ -1,0 +1,55 @@
+#!/bin/bash
+
+echo $PWD
+album=`basename "$PWD"`
+
+if [[ ${#album} -lt 10 ]]; then
+	par=`dirname "$PWD"`
+	album="`basename "$par"` $album"
+fi
+
+arrAlbum=(${album// - / })
+
+artist=${arrAlbum[0]}
+
+if [[ ${#artist} -lt 5 ]]; then
+	par=`dirname "$PWD"`
+	artist=`basename "$par"`
+	artist=${artist//[^[:alpha:] ]/}
+fi
+
+if [ -n "$1" ]; then
+  artist=$1
+fi
+
+i=2
+albumStr=${arrAlbum[1]}
+while [ $i -lt ${#arrAlbum[@]} ]; do
+    albumStr="$albumStr ${arrAlbum[i]}"
+	i=$((i+1))
+done
+
+album=$albumStr
+
+genre='Classical'
+
+if [ -n "$2" ]; then
+  genre=$2
+fi
+
+i=1
+if [ -n "$(ls *.flac)" ]; then
+	echo $album
+	for file in *.flac; do	
+		title=$(basename "$file" .flac)
+		title="${title:5}"
+		echo "ALBUM=$album TITLE=$title TRACKNUMBER=$i ARTIST=$artist GENRE=$genre"
+		metaflac --remove-all "$file"
+		metaflac --set-tag="COMPOSER=$artist" --set-tag="ARTIST=$artist" --set-tag="GENRE=$genre" --set-tag="ALBUM=$album" --set-tag="TITLE=$title" --set-tag="TRACKNUMBER=$i" "$file"	
+		i=$((i+1))
+	done
+fi	
+#mpc update
+#metaflac --list *.flac
+#metaflac --remove-tag="TITLE" filename
+#metaflac --set-tag="TITLE=Symphony No. 6" filename
