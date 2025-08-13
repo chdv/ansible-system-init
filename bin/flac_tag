@@ -8,7 +8,7 @@ if [[ ${#album} -lt 10 ]]; then
 	album="`basename "$par"` $album"
 fi
 
-arrAlbum=(${album// - / })
+arrAlbum=(${album//-/ })
 
 artist=${arrAlbum[0]}
 
