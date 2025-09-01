@@ -7,3 +7,5 @@ else
 	convert -thumbnail 1000 -quality 90% $image front.jpg
 	xdg-open front.jpg
 fi
+
+#convert -quality 90% *.webp front.jpg
