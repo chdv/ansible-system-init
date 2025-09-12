@@ -24,7 +24,14 @@ if [ -e $CARD1_PATH ]; then
 	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/ $CARD1_PATH/PCM16/ --exclude='/New' 
 	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM24/Composers/ $CARD1_PATH/PCM24/Composers/
 elif [ -e $CARD2_PATH ]; then	
-	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM24/ $CARD2_PATH/PCM24/ --exclude='/Composers' --exclude='/New' 
+#	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM24/ $CARD2_PATH/PCM24/ --exclude='/Composers' --exclude='/New' 
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/New/ $CARD2_PATH/PCM16/New/
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM24/New/ $CARD2_PATH/PCM24/New/
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/DSD64/New/ $CARD2_PATH/DSD64/New/
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/DSD/New/ $CARD2_PATH/DSD/New/	
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/Symphonic\ pop/ $CARD2_PATH/PCM16/Symphonic\ pop/
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/Jazz/ $CARD2_PATH/PCM16/Jazz/
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/Soundtrack/ $CARD2_PATH/PCM16/Soundtrack/
 elif [ -e $CARD3_PATH ]; then
 	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/New/ $CARD3_PATH/PCM16/New/
 	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM24/New/ $CARD3_PATH/PCM24/New/
@@ -32,4 +39,4 @@ elif [ -e $CARD3_PATH ]; then
 	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/DSD/New/ $CARD3_PATH/DSD/New/	
 fi
 
-sudo iotop
+sync
