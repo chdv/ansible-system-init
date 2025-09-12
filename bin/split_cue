@@ -4,8 +4,7 @@
 function split_cue_func {
 	echo "Exec in dir:" `pwd`	
 	shnsplit -f *.cue -t "%n - %t" -o "flac flac -s -8 -o %f -" *.flac
-	rename "s/:/ -/g" *
-	rename "s/\?//g" *
+	rename_bad
 }
 
 export -f split_cue_func
