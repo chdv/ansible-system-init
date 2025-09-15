@@ -1,0 +1,1 @@
+mpc -f "%composer% - %title%\n%album%\n%audioformat%"
