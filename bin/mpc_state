@@ -1,1 +1,6 @@
+echo --- Playing:
 mpc -f "%composer% - %title%\n%album%\n%audioformat%"
+echo --- Playlist:
+mpc playlist
+echo --- New Size:
+du -hs /media/dima/wd160/Music/*/New
