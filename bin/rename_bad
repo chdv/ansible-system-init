@@ -7,3 +7,5 @@ rename "s/:/ -/g" *
 rename "s/\?//g" *  
 rename "s/''/'/g" *
 rename "s/ -  - / - /g" *
+rename "s/ no\./ No\./g" *
+rename "s/ op\./ Op\./g" *
