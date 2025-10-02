@@ -1,9 +1,11 @@
 #!/bin/bash
 
-#find . -type d -execdir flac_tag \;
-
 for dir in */; do
-  if [ -d "$dir" ]; then # Ensure it's a directory
-    (cd "$dir" && flac_tag "$@") # Execute in a subshell to return to parent directory
+  if [ -d "$dir" ]; then 
+    if [[ $(ls "$dir"/*.flac) ]]; then
+      (cd "$dir" && flac_tag "$@") 
+    else 
+      (cd "$dir" && flac_tags "$@") 
+    fi
   fi
 done
