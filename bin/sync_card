@@ -21,22 +21,31 @@ if [ "$1" = "-u" ]; then
 fi
 
 if [ -e $CARD1_PATH ]; then
-	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/ $CARD1_PATH/PCM16/ --exclude='/New' 
-	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM24/Composers/ $CARD1_PATH/PCM24/Composers/
+	CARD_PATH=$CARD1_PATH
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/ $CARD_PATH/PCM16/ --exclude='/New' 
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM24/Composers/ $CARD_PATH/PCM24/Composers/
+	echo
+	df -h $CARD_PATH
 elif [ -e $CARD2_PATH ]; then	
-#	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM24/ $CARD2_PATH/PCM24/ --exclude='/Composers' --exclude='/New' 
-	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/New/ $CARD2_PATH/PCM16/New/
-	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM24/New/ $CARD2_PATH/PCM24/New/
-	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/DSD64/New/ $CARD2_PATH/DSD64/New/
-	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/DSD/New/ $CARD2_PATH/DSD/New/	
-	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/Symphonic\ pop/ $CARD2_PATH/PCM16/Symphonic\ pop/
-	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/Jazz/ $CARD2_PATH/PCM16/Jazz/
-	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/Soundtrack/ $CARD2_PATH/PCM16/Soundtrack/
+	CARD_PATH=$CARD2_PATH
+#	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM24/ $CARD_PATH/PCM24/ --exclude='/Composers' --exclude='/New' 
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/New/ $CARD_PATH/PCM16/New/
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM24/New/ $CARD_PATH/PCM24/New/
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/DSD64/New/ $CARD_PATH/DSD64/New/
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/DSD/New/ $CARD_PATH/DSD/New/	
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/Symphonic\ pop/ $CARD_PATH/PCM16/Symphonic\ pop/
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/Jazz/ $CARD_PATH/PCM16/Jazz/
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/Soundtrack/ $CARD_PATH/PCM16/Soundtrack/
+	echo
+	df -h $CARD_PATH
 elif [ -e $CARD3_PATH ]; then
-	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/New/ $CARD3_PATH/PCM16/New/
-	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM24/New/ $CARD3_PATH/PCM24/New/
-	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/DSD64/New/ $CARD3_PATH/DSD64/New/
-	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/DSD/New/ $CARD3_PATH/DSD/New/	
+	CARD_PATH=$CARD3_PATH
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/New/ $CARD_PATH/PCM16/New/
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM24/New/ $CARD_PATH/PCM24/New/
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/DSD64/New/ $CARD_PATH/DSD64/New/
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/DSD/New/ $CARD_PATH/DSD/New/	
+	echo
+	df -h $CARD_PATH
 fi
 
 sync
