@@ -155,6 +155,8 @@ mpd:
     device: "hw:CARD=H7,DEV=0"
   - name: "FIIO KA17"
     device: "hw:CARD=KA17,DEV=0"
+  - name: "FiiO JM21"
+    device: "hw:CARD=JM21,DEV=0"  
   - name: "aune Flamingo DAC"
     device: "hw:CARD=DAC,DEV=0"
   user: null

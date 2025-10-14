@@ -22,7 +22,7 @@ fi
 
 if [ -e $CARD1_PATH ]; then
 	CARD_PATH=$CARD1_PATH
-	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/ $CARD_PATH/PCM16/ --exclude='/New' 
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/Composers/ $CARD_PATH/PCM16/Composers/
 	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM24/Composers/ $CARD_PATH/PCM24/Composers/
 	echo
 	df -h $CARD_PATH
