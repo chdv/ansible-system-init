@@ -22,8 +22,14 @@ fi
 
 if [ -e $CARD1_PATH ]; then
 	CARD_PATH=$CARD1_PATH
-	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/Composers/ $CARD_PATH/PCM16/Composers/
-	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM24/Composers/ $CARD_PATH/PCM24/Composers/
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/New/ $CARD_PATH/PCM16/New/
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM24/New/ $CARD_PATH/PCM24/New/
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/DSD64/New/ $CARD_PATH/DSD64/New/
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/DSD/New/ $CARD_PATH/DSD/New/	
+
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/ $CARD_PATH/PCM16/
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM24/Symphonic/ $CARD_PATH/PCM24/Symphonic/
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM24/Soundtrack/ $CARD_PATH/PCM24/Soundtrack/
 	echo
 	df -h $CARD_PATH
 elif [ -e $CARD2_PATH ]; then	
