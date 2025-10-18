@@ -15,7 +15,7 @@ names=dict(map(lambda s: (s[:2], s[4:]), map(str.rstrip, open(wdir + '/names.txt
 files=[f for f in os.listdir(wdir) if f.endswith(media)]
 root, extension = os.path.splitext(files[0])
 for file in files:
-    newName = file[:2] + ' - ' + names[file[:2]] + extension
+    newName = file[:2] + '. ' + names[file[:2]] + extension
     print(file)
     print(newName)
     os.rename(wdir + '/' + file, wdir + '/' + newName)
