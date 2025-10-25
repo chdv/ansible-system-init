@@ -12,19 +12,17 @@ COPY_DIRS3=("New")
 
 if [ -e "$PHONE1_PATH" ]; then
 	PHONE_PATH=$PHONE1_PATH
-	COPY_DIRS=$COPY_DIRS1
 	mkdir "$PHONE_PATH"/PCM16
 	cd $MUSIC_PATH
-	for DIR in "${COPY_DIRS[@]}"; do
+	for DIR in "${COPY_DIRS1[@]}"; do
 		echo `date +%T` Copying $(du -sh "$DIR")...
 		cp -vru "$DIR" "$PHONE_PATH"/PCM16
 	done
 elif [ -e "$PHONE2_PATH" ]; then
 	PHONE_PATH=$PHONE2_PATH
-	COPY_DIRS=$COPY_DIRS3
 	mkdir "$PHONE_PATH"/PCM16
 	cd $MUSIC_PATH
-	for DIR in "${COPY_DIRS[@]}"; do
+	for DIR in "${COPY_DIRS3[@]}"; do
 		echo `date +%T` Copying $(du -sh "$DIR")...
 		cp -vru "$DIR" "$PHONE_PATH"/PCM16
 	done	

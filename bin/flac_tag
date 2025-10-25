@@ -42,7 +42,7 @@ if [ -n "$(ls *.flac)" ]; then
 	echo $album
 	for file in *.flac; do	
 		title=$(basename "$file" .flac)
-		title="${title:5}"
+		title="${title:4}"
 		echo "ALBUM=$album TITLE=$title TRACKNUMBER=$i ARTIST=$artist GENRE=$genre"
 		metaflac --remove-all "$file"
 		metaflac --set-tag="COMPOSER=$artist" --set-tag="ARTIST=$artist" --set-tag="GENRE=$genre" --set-tag="ALBUM=$album" --set-tag="TITLE=$title" --set-tag="TRACKNUMBER=$i" "$file"	
