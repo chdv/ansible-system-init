@@ -28,3 +28,11 @@ elif [ -e "$PHONE2_PATH" ]; then
 	done	
 fi
 echo `date +%T` Ending
+
+echo	                   
+echo '            ######   ####  #    # ###### '
+echo '            #     # #    # ##   # #      '
+echo '            #     # #    # # #  # #####  '
+echo '            #     # #    # #  # # #      '
+echo '            #     # #    # #   ## #      '
+echo '            ######   ####  #    # ###### '
