@@ -8,6 +8,7 @@ CARD2_PATH="/media/dima/Blue512Gb"
 CARD3_PATH="/media/dima/Red512Gb"
 
 MUSIC_PATH="/media/dima/wd160/Music"
+MUSIC_TXT_PATH="/media/dima/wd160/MusicTxt"
 
 if [ "$1" = "-u" ]; then
 	if [ -e $CARD1_PATH ]; then
@@ -22,20 +23,22 @@ fi
 
 if [ -e $CARD1_PATH ]; then
 	CARD_PATH=$CARD1_PATH
-	mkdir $CARD_PATH/PCM16 $CARD_PATH/PCM24 $CARD_PATH/DSD64 $CARD_PATH/DSD
+	mkdir $CARD_PATH/PCM16 $CARD_PATH/PCM24 $CARD_PATH/DSD64 $CARD_PATH/DSD $CARD_PATH/MusicTxt
 	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/New/ $CARD_PATH/PCM16/New/
 	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM24/New/ $CARD_PATH/PCM24/New/
 	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/DSD64/New/ $CARD_PATH/DSD64/New/
 	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/DSD/New/ $CARD_PATH/DSD/New/	
 
-	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/ $CARD_PATH/PCM16/
+	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/ $CARD_PATH/PCM16/ 
 	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM24/Symphonic/ $CARD_PATH/PCM24/Symphonic/
 	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM24/Soundtrack/ $CARD_PATH/PCM24/Soundtrack/
+
+	rsync -tr --delete --outbuf=N $MUSIC_TXT_PATH/ $CARD_PATH/MusicTxt/
 	echo
 	df -h $CARD_PATH
 elif [ -e $CARD2_PATH ]; then	
 	CARD_PATH=$CARD2_PATH
-	mkdir $CARD_PATH/PCM16 $CARD_PATH/PCM24 $CARD_PATH/DSD64 $CARD_PATH/DSD
+	mkdir $CARD_PATH/PCM16 $CARD_PATH/PCM24 $CARD_PATH/DSD64 $CARD_PATH/DSD $CARD_PATH/MusicTxt
 #	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM24/ $CARD_PATH/PCM24/ --exclude='/Composers' --exclude='/New' 
 	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/New/ $CARD_PATH/PCM16/New/
 	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM24/New/ $CARD_PATH/PCM24/New/
@@ -45,11 +48,13 @@ elif [ -e $CARD2_PATH ]; then
 	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/Symphonic\ pop/ $CARD_PATH/PCM16/Symphonic\ pop/
 	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/Jazz/ $CARD_PATH/PCM16/Jazz/
 	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/Soundtrack/ $CARD_PATH/PCM16/Soundtrack/
+
+	rsync -tr --delete --outbuf=N $MUSIC_TXT_PATH/ $CARD_PATH/MusicTxt/
 	echo
 	df -h $CARD_PATH
 elif [ -e $CARD3_PATH ]; then
 	CARD_PATH=$CARD3_PATH
-	mkdir $CARD_PATH/PCM16 $CARD_PATH/PCM24 $CARD_PATH/DSD64 $CARD_PATH/DSD
+	mkdir $CARD_PATH/PCM16 $CARD_PATH/PCM24 $CARD_PATH/DSD64 $CARD_PATH/DSD $CARD_PATH/MusicTxt
 	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/New/ $CARD_PATH/PCM16/New/
 	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM24/New/ $CARD_PATH/PCM24/New/
 	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/DSD64/New/ $CARD_PATH/DSD64/New/
@@ -57,6 +62,8 @@ elif [ -e $CARD3_PATH ]; then
 
 	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/Composers/ $CARD_PATH/PCM16/Composers/
 	rsync -vtr --delete --progress --outbuf=N $MUSIC_PATH/PCM16/Symphonic/ $CARD_PATH/PCM16/Symphonic/
+
+	rsync -tr --delete --outbuf=N $MUSIC_TXT_PATH/ $CARD_PATH/MusicTxt/
 	echo
 	df -h $CARD_PATH
 fi
