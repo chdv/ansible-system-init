@@ -1,0 +1,161 @@
+#!/usr/bin/env python3
+
+import os
+import re
+import mutagen
+from mutagen.dsf import DSF
+from mutagen.flac import FLAC
+from mutagen.id3 import TIT2
+import argparse
+from pathlib import Path
+
+def clean_filename(filename):
+    """
+    Очищает имя файла от расширения и порядкового номера
+    """
+    # Убираем расширение
+    name_without_ext = os.path.splitext(filename)[0]
+    
+    # Убираем порядковые номера в начале файла с различными разделителями
+    patterns = [
+        r'^\d+\s*[-_.]\s*',  # "01 - ", "001_", "1. "
+        r'^\d+\s+',          # "01 " с пробелом
+        r'^\d+[-_]',         # "01-", "001_"
+        r'^\(\d+\)\s*',      # "(01) "
+        r'^\[\d+\]\s*',      # "[01] "
+    ]
+    
+    cleaned_name = name_without_ext
+    for pattern in patterns:
+        cleaned_name = re.sub(pattern, '', cleaned_name)
+    
+    # Убираем лишние пробелы
+    cleaned_name = cleaned_name.strip()
+    
+    return cleaned_name
+
+def process_audio_file(file_path, dry_run=False):
+    """
+    Обрабатывает аудиофайл: устанавливает тег TITLE из имени файла
+    """
+    try:
+        # Получаем очищенное название для тега
+        clean_title = clean_filename(file_path.name)
+        
+        if dry_run:
+            return f"[DRY RUN] {file_path.name} -> TITLE: '{clean_title}'", True
+        
+        # Открываем файл в зависимости от типа
+        if file_path.suffix.lower() == '.dsf':
+            audio = DSF(file_path)
+        elif file_path.suffix.lower() == '.flac':
+            audio = FLAC(file_path)
+        else:
+            return f"✗ Неподдерживаемый формат: {file_path.name}", False
+        
+        # Удаляем все существующие теги TITLE
+        if 'title' in audio:
+            del audio['title']
+        
+        # Устанавливаем новый тег TITLE
+        audio['title'] = TIT2(text=clean_title)
+        
+        # Сохраняем изменения
+        audio.save()
+        
+        return f"✓ Обработан: {file_path.name} -> TITLE: '{clean_title}'", True
+        
+    except Exception as e:
+        return f"✗ Ошибка при обработке {file_path.name}: {str(e)}", False
+
+def process_audio_files(directory_path, dry_run=False):
+    """
+    Обрабатывает все аудиофайлы в указанной директории
+    """
+    directory = Path(directory_path)
+    
+    if not directory.exists():
+        print(f"Ошибка: Директория '{directory_path}' не существует")
+        return
+    
+    # Ищем DSF и FLAC файлы
+    audio_files = list(directory.glob("**/*.dsf")) + list(directory.glob("**/*.flac"))
+    
+    if not audio_files:
+        print("Аудиофайлы (DSF/FLAC) не найдены")
+        return
+    
+    print(f"Найдено {len(audio_files)} аудиофайлов")
+    print("=" * 50)
+    
+    successful = 0
+    failed = 0
+    
+    for audio_file in audio_files:
+        result, success = process_audio_file(audio_file, dry_run)
+        print(result)
+        
+        if success:
+            successful += 1
+        else:
+            failed += 1
+    
+    print("=" * 50)
+    print(f"Статистика: Успешно - {successful}, Ошибок - {failed}")
+
+def test_cleaning():
+    """
+    Функция для тестирования очистки имен файлов
+    """
+    test_files = [
+        "01 - Amazing Song.dsf",
+        "003_Great Track.flac", 
+        "5. Wonderful Tune.dsf",
+        "(07) Special Track.flac",
+        "[12] Bonus Track.dsf",
+        "Simple Filename.flac",
+        "001 - First Track - Special Version.dsf",
+        "15_The_Last_Song.flac"
+    ]
+    
+    print("Тест очистки имен файлов:")
+    print("-" * 40)
+    for test_file in test_files:
+        cleaned = clean_filename(test_file)
+        print(f"{test_file} -> '{cleaned}'")
+
+def main():
+    parser = argparse.ArgumentParser(
+        description='Установка тега TITLE для DSF и FLAC файлов из названия файла',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog='''
+Примеры использования:
+  %(prog)s /путь/к/музыке --dry-run    # Предпросмотр изменений
+  %(prog)s /путь/к/музыке              # Применить изменения
+  %(prog)s --test                      # Тест очистки имен файлов
+
+Поддерживаемые форматы: DSF, FLAC
+        '''
+    )
+    
+    parser.add_argument('--dry-run', action='store_true', 
+                       help='Показать какие изменения будут без реального применения')
+    parser.add_argument('--test', action='store_true',
+                       help='Протестировать очистку имен файлов')
+    
+    args = parser.parse_args()
+    
+    print("Audio Tag Editor - DSF/FLAC")
+    print("============================")
+    
+    if args.test:
+        test_cleaning()
+        return
+        
+    process_audio_files(os.getcwd(), args.dry_run)
+    
+    if args.dry_run:
+        print("\nРежим предпросмотра. Для применения изменений запустите без --dry-run")
+
+if __name__ == "__main__":
+    main()
