@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#cp -vru \!Аудио /media/dima/Red1Tb/Music1/Songs/\!Аудио
+
 # PocoX3Pro
 PHONE1_PATH="/run/user/1000/gvfs/mtp:host=Xiaomi_POCO_X3_Pro_168f2858/Внутренний общий накопитель"
 # PocoF5
