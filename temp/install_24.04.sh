@@ -121,6 +121,6 @@ sudo snap install go --classic
 
 wine Distr/Setup_MyHomeLib_2_3.exe
 
-cp /var/lib/snapd/desktop/applications/ 
-cp /var/lib/flatpak/exports/share/applications/ 
-cp /usr/share/applications/ 
+cp /usr/share/applications/
+cp /var/lib/snapd/desktop/applications/
+cp /var/lib/flatpak/exports/share/applications/
