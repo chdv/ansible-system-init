@@ -7,3 +7,4 @@ sudo apt autoremove -y
 sudo snap refresh
 flatpak update -y
 sudo systemctl daemon-reload
+snap list --all | awk '$6~"disabled"{print $1" --revision "$3}' | sudo xargs -rn3 snap remove

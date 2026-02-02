@@ -1,0 +1,3 @@
+sudo cp -r /home/dima/Workspace/NewKnowledge/site/* /var/www/know/
+sudo chmod 755 -R /var/www/know/
+sudo sed -i 's/188.127.225.100:3310/localhost/g' /var/www/know/inc/db.inc.php
